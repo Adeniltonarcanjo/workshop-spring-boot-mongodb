@@ -24,21 +24,23 @@ public class UserResource {
 	@Autowired
 	private UserService service;
 
+	// GET ALL USERS
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<UserDTO>> findAll() {
 		List<User> list = service.findAll();
 		List<UserDTO> listDto = list.stream().map(x -> new UserDTO(x)).collect(Collectors.toList());
 		return ResponseEntity.ok(listDto);
-
 	}
-
+ 
+	//GET USER BY ID 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<UserDTO> findById(@PathVariable String id) {
 		User obj = service.findById(id);
 		return ResponseEntity.ok(new UserDTO(obj));
 
 	}
-
+	
+    //POST USER 
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<UserDTO> insert(@RequestBody UserDTO bjtDto) {
 		User obj = service.fromDTO(bjtDto);
@@ -49,7 +51,13 @@ public class UserResource {
 		// return cod 201 http
 		return ResponseEntity.created(uri).build();
 
+	}
+	
+	//DELETE USER BY ID 
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<Void> delete(@PathVariable String id) {
+		service.delete(id);
+		return ResponseEntity.noContent().build();
 
 	}
-
 }
