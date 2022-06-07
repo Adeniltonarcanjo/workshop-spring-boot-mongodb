@@ -4,10 +4,10 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.annotation.Reference;
 import org.springframework.stereotype.Service;
 
 import com.github.adeniltonarcanjo.workshopmongo.domain.User;
+import com.github.adeniltonarcanjo.workshopmongo.dto.UserDTO;
 import com.github.adeniltonarcanjo.workshopmongo.repository.UserRepository;
 import com.github.adeniltonarcanjo.workshopmongo.services.exception.ObjectNotFoundException;
 
@@ -25,6 +25,16 @@ public class UserService {
 
 		Optional<User> obj = repository.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException("user id not exist"));
+	}
+	
+	
+	public User insert(User obj ) {
+		return repository.insert(obj);
+	
+	}
+	
+	public User fromDTO (UserDTO objDto) {
+		return new  User(objDto.getId(), objDto.getName(), objDto.getEmail());
 	}
 
 }
