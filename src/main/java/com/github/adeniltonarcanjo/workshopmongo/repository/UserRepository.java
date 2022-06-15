@@ -7,6 +7,6 @@ import com.github.adeniltonarcanjo.workshopmongo.domain.Post;
 import com.github.adeniltonarcanjo.workshopmongo.domain.User;
 
 @Repository
-public interface UserRepository extends MongoRepository<Post, String> {
+public interface UserRepository extends MongoRepository<User, String> {
 
 }
