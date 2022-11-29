@@ -14,20 +14,16 @@ import com.github.adeniltonarcanjo.workshopmongo.services.PostService;
 @RequestMapping(value = "/posts")
 public class PostResource {
 
-	@Autowired
-	private PostService service;
+    @Autowired
+    private PostService service;
 
-	
 
-	// GET Post BY ID
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ResponseEntity<Post> findById(@PathVariable String id) {
-		Post obj = service.findById(id);
-		return ResponseEntity.ok().body(obj);
+    // GET Post BY ID
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public ResponseEntity<Post> findById(@PathVariable String id) {
+        Post obj = service.findById(id);
+        return ResponseEntity.ok().body(obj);
+    }
 
-	}
 
-	
-	
-	
 }

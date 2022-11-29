@@ -1,13 +1,15 @@
 package com.github.adeniltonarcanjo.workshopmongo.domain;
 
-import java.io.Serializable;
-import java.sql.Date;
-import java.util.Objects;
-
+import com.github.adeniltonarcanjo.workshopmongo.dto.AuthorDTO;
+import com.github.adeniltonarcanjo.workshopmongo.dto.CommentDTO;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import com.github.adeniltonarcanjo.workshopmongo.dto.AuthorDTO;
+import java.io.Serializable;
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 @Document(collection = "post")
 public class Post implements Serializable {
@@ -16,22 +18,32 @@ public class Post implements Serializable {
 
 	@Id
 	private String id;
-	private Date date;
+	private java.util.Date date;
 	private String title;
 	private String body;
 	private AuthorDTO author ;
+
+	private List<CommentDTO> comments= new ArrayList<>();
 
 	public Post() {
 
 	}
 
-	public Post(String id, Date date, String title, String body,AuthorDTO author) {
+	public Post(String id, java.util.Date date, String title, String body, AuthorDTO author) {
 		super();
 		this.id = id;
 		this.date = date;
 		this.title = title;
 		this.body = body;
 		this.author=author;
+	}
+
+	public List<CommentDTO> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<CommentDTO> comments) {
+		this.comments = comments;
 	}
 
 	public String getId() {
@@ -42,7 +54,7 @@ public class Post implements Serializable {
 		this.id = id;
 	}
 
-	public Date getDate() {
+	public java.util.Date getDate() {
 		return date;
 	}
 
@@ -90,8 +102,4 @@ public class Post implements Serializable {
 		Post other = (Post) obj;
 		return Objects.equals(id, other.id);
 	}
-	
-	
-
-	
 }

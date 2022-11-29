@@ -11,9 +11,7 @@ public class AuthorDTO implements Serializable {
 	private String id ;
 	private String name;
 	
-	
 	public AuthorDTO() {
-		
 	}
 
 	public AuthorDTO(User obj) {
@@ -36,7 +34,4 @@ public class AuthorDTO implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	
-	
 }

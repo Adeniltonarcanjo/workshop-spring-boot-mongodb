@@ -11,7 +11,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "user")
 public class User implements Serializable {
-
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -19,7 +18,7 @@ public class User implements Serializable {
 	private String name;
 	private String email;
 	
-	@DBRef(lazy=true)
+	@DBRef(lazy=true) // references to post
 	private List<Post> posts = new ArrayList<>();
 
 	public User() {
@@ -56,8 +55,6 @@ public class User implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
-	
 
 	public List<Post> getPosts() {
 		return posts;
@@ -83,5 +80,4 @@ public class User implements Serializable {
 		User other = (User) obj;
 		return Objects.equals(id, other.id);
 	}
-
 }

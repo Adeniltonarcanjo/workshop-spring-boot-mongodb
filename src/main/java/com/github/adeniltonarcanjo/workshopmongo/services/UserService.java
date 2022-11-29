@@ -14,51 +14,41 @@ import com.github.adeniltonarcanjo.workshopmongo.services.exception.ObjectNotFou
 @Service
 public class UserService {
 
-	@Autowired
-	private UserRepository repository;
+    @Autowired
+    private UserRepository repository;
 
-	public List<User> findAll() {
-		return repository.findAll();
-	}
+    public List<User> findAll() {
+        return repository.findAll();
+    }
 
-	public User findById(String id) {
+    public User findById(String id) {
+        Optional<User> obj = repository.findById(id);
+        return obj.orElseThrow(() -> new ObjectNotFoundException("user id not exist"));
+    }
 
-		Optional<User> obj = repository.findById(id);
-		return obj.orElseThrow(() -> new ObjectNotFoundException("user id not exist"));
-	}
-	
-	
-	public User insert(User obj ) {
-		return repository.insert(obj);
-	
-	}
-	
-	public void delete(String id ) {
-		findById(id);
-		repository.deleteById(id);
-	}
-	
-	private void updateData(User newObj, User obj) {
-		newObj.setName(obj.getName());
-		newObj.setEmail(obj.getEmail());
-		
-	}
-	
-	public User update(User obj) {
-		User newObj = findById(obj.getId());		
-		updateData(newObj, obj);
-		return repository.save(newObj);
-		}
-	
-	
+    public User insert(User obj) {
+        return repository.insert(obj);
+    }
 
-	public User fromDTO (UserDTO objDto) {
-		return new  User(objDto.getId(), objDto.getName(), objDto.getEmail());
-	}
-	
-	
-	
-	
+    public void delete(String id) {
+        findById(id);
+        repository.deleteById(id);
+    }
+
+    private void updateData(User newObj, User obj) {
+        newObj.setName(obj.getName());
+        newObj.setEmail(obj.getEmail());
+    }
+
+    public User update(User obj) {
+        User newObj = findById(obj.getId());
+        updateData(newObj, obj);
+        return repository.save(newObj);
+    }
+
+    public User fromDTO(UserDTO objDto) {
+        return new User(objDto.getId(), objDto.getName(), objDto.getEmail());
+    }
 
 
 }

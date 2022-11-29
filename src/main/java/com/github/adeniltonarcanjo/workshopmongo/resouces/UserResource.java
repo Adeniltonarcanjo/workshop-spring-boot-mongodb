@@ -38,12 +38,11 @@ public class UserResource {
 	public ResponseEntity<UserDTO> findById(@PathVariable String id) {
 		User obj = service.findById(id);
 		return ResponseEntity.ok().body(new UserDTO(obj));
-
 	}
 
 	// POST USER
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<UserDTO> insert(@RequestBody UserDTO bjtDto) {
+	public ResponseEntity<Void> insert(@RequestBody UserDTO bjtDto) {
 		User obj = service.fromDTO(bjtDto);
 		obj = service.insert(obj);
 		// put the instance object in url
@@ -51,7 +50,6 @@ public class UserResource {
 
 		// return cod 201 http
 		return ResponseEntity.created(uri).build();
-
 	}
 
 	// DELETE USER BY ID
@@ -59,7 +57,6 @@ public class UserResource {
 	public ResponseEntity<Void> delete(@PathVariable String id) {
 		service.delete(id);
 		return ResponseEntity.noContent().build();
-
 	}
 
 	// UPDATE USER
@@ -70,7 +67,6 @@ public class UserResource {
 		obj = service.update(obj);
 
 		return ResponseEntity.noContent().build();
-
 	}
 	
 	
@@ -78,7 +74,6 @@ public class UserResource {
 	public ResponseEntity<List<Post>> findPosts(@PathVariable String id) {
 		User obj = service.findById(id);
 		return ResponseEntity.ok().body(obj.getPosts());
-
 	}
 	
 	

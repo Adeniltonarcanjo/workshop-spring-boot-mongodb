@@ -13,7 +13,6 @@ public class UserDTO implements Serializable {
 	private String email;
 
 	public UserDTO() {
-
 	}
 
 	public UserDTO(User obj) {
@@ -46,11 +45,5 @@ public class UserDTO implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
-	
-	
-	
-	
-	
 
 }
