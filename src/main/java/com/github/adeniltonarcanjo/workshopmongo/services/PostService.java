@@ -35,6 +35,5 @@ public class PostService {
 		maxDate = new Date(maxDate.getTime() +24*60*60*1000);
 		return repository.fullSearch(text,minDate,maxDate);
 	}
-	
-	
+
 }
